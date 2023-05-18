@@ -3,20 +3,24 @@ package com.reba.rebatest.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reba.rebatest.model.Persona;
 import com.reba.rebatest.services.PersonaService;
+import com.reba.rebatest.services.PersonasStats;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Collections;
-import java.util.Optional;
+import java.util.*;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -109,5 +113,30 @@ public class PersonaControllerTest {
         mockMvc.perform(post("/api/personas/1/padre/2"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Se ha establecido a 1 como padre de 2"));
+    }
+
+    @Test
+    public void getStatsTest() {
+        // Given
+        final PersonaService personaService = Mockito.mock(PersonaService.class);
+        final PersonaController personaController = new PersonaController(personaService);
+
+        final PersonasStats argentinaStats = new PersonasStats("Argentina", 66.67);
+        final PersonasStats brasilStats = new PersonasStats("Brasil", 33.33);
+
+        final List<PersonasStats> stats = Arrays.asList(argentinaStats, brasilStats);
+
+        when(personaService.getPercentageByCountry()).thenReturn(stats);
+
+        // When
+        final ResponseEntity<List<PersonasStats>> result = personaController.getStats();
+
+        // Then
+        Assertions.assertEquals(200, result.getStatusCodeValue());
+        Assertions.assertEquals(2, Objects.requireNonNull(result.getBody()).size());
+        Assertions.assertEquals("Argentina", result.getBody().get(0).getCountry());
+        Assertions.assertEquals(66.67, result.getBody().get(0).getPercentage(), 0.01);
+        Assertions.assertEquals("Brasil", result.getBody().get(1).getCountry());
+        Assertions.assertEquals(33.33, result.getBody().get(1).getPercentage(), 0.01);
     }
 }

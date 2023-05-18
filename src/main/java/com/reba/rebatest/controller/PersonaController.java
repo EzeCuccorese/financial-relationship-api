@@ -2,6 +2,7 @@ package com.reba.rebatest.controller;
 
 import com.reba.rebatest.model.Persona;
 import com.reba.rebatest.services.PersonaService;
+import com.reba.rebatest.services.PersonasStats;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -73,5 +74,11 @@ public class PersonaController {
         personaService.save(hijo.get());
 
         return ResponseEntity.ok("Se ha establecido a " + idPadre + " como padre de " + idHijo);
+    }
+
+    @GetMapping("/stats")
+    public ResponseEntity<List<PersonasStats>> getStats() {
+        final List<PersonasStats> stats = personaService.getPercentageByCountry();
+        return ResponseEntity.ok(stats);
     }
 }

@@ -6,8 +6,11 @@ import com.reba.rebatest.repository.PersonaRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Servicio para gestionar operaciones relacionadas con la entidad Persona.
@@ -100,5 +103,23 @@ public class PersonaService {
         if (fechaNacimiento.plusYears(18).isAfter(fechaActual)) {
             throw new EdadIncorectaException();
         }
+    }
+
+    /**
+     * Obtiene todas las personas, las agrupa por nacionalidad y calcula el porcentaje de personas de cada
+     * nacionalidad.
+     *
+     * @return la agrupacin de las personas por porcentajes.
+     */
+    public List<PersonasStats> getPercentageByCountry() {
+        final List<Persona> allPersonas = this.findAll();
+        final Map<String, Long> countByCountry = allPersonas.stream()
+                .collect(Collectors.groupingBy(Persona::getNacionalidad, Collectors.counting()));
+        final long total = allPersonas.size();
+        final List<PersonasStats> porcentajePorPais = new ArrayList<>();
+        for (final Map.Entry<String, Long> entry : countByCountry.entrySet()) {
+            porcentajePorPais.add(new PersonasStats(entry.getKey(), (double) entry.getValue() / total * 100));
+        }
+        return porcentajePorPais;
     }
 }

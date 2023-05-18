@@ -28,11 +28,11 @@ public class PersonaRepositoryTest {
 
     @BeforeEach
     public void setup() {
-        final Pais pais = new Pais("Argentina");
+        final Pais pais = new Pais("Argentina", "ARG");
         entityManager.persist(pais);
         entityManager.flush();
 
-        final DatosContacto datosContacto = new DatosContacto("123456", "mail@mail.com");
+        final DatosContacto datosContacto = new DatosContacto("Mitre 200", "45584422", null);
         entityManager.persist(datosContacto);
         entityManager.flush();
 

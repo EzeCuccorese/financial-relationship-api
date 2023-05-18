@@ -104,4 +104,42 @@ public class PersonaServiceTest {
         final Persona result = personaService.update(id, persona);
         assertNull(result);
     }
+
+    @Test
+    public void getPercentageByCountryTest() {
+        // Given
+        final Persona p1 = new Persona();
+        p1.setNacionalidad("Argentina");
+
+        final Persona p2 = new Persona();
+        p2.setNacionalidad("Argentina");
+
+        final Persona p3 = new Persona();
+        p3.setNacionalidad("Brasil");
+
+        final List<Persona> allPersonas = Arrays.asList(p1, p2, p3);
+
+        when(personaService.findAll()).thenReturn(allPersonas);
+
+        // When
+        final List<PersonasStats> result = personaService.getPercentageByCountry();
+
+        // Then
+        assertEquals(2, result.size());
+
+        final PersonasStats argentinaStats = result.stream()
+                .filter(ps -> ps.getCountry().equals("Argentina"))
+                .findFirst()
+                .orElse(null);
+
+        final PersonasStats brasilStats = result.stream()
+                .filter(ps -> ps.getCountry().equals("Brasil"))
+                .findFirst()
+                .orElse(null);
+
+        assertNotNull(argentinaStats);
+        assertEquals(66.67, argentinaStats.getPercentage(), 0.01);
+        assertNotNull(brasilStats);
+        assertEquals(33.33, brasilStats.getPercentage(), 0.01);
+    }
 }

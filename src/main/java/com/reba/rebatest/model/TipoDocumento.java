@@ -9,7 +9,7 @@ public enum TipoDocumento {
 
     private final String descripcion;
 
-    TipoDocumento(String descripcion) {
+    TipoDocumento(final String descripcion) {
         this.descripcion = descripcion;
     }
 

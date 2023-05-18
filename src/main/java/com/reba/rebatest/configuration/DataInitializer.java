@@ -12,19 +12,19 @@ public class DataInitializer implements CommandLineRunner {
     private final PaisRepository paisRepository;
 
     @Autowired
-    public DataInitializer(PaisRepository paisRepository) {
+    public DataInitializer(final PaisRepository paisRepository) {
         this.paisRepository = paisRepository;
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(final String... args) throws Exception {
         cargarPaisesDeEjemplo();
     }
 
     private void cargarPaisesDeEjemplo() {
-        Pais pais1 = new Pais(1L, "Argentina");
-        Pais pais2 = new Pais(2L, "Brasil");
-        Pais pais3 = new Pais(3L, "Chile");
+        final Pais pais1 = new Pais("Argentina", "ARG");
+        final Pais pais2 = new Pais("Brasil", "BRA");
+        final Pais pais3 = new Pais("Chile", "CHI");
 
         paisRepository.save(pais1);
         paisRepository.save(pais2);
