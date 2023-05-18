@@ -1,8 +1,8 @@
 package com.reba.rebatest.controller;
 
 import com.reba.rebatest.model.Persona;
-import com.reba.rebatest.services.PersonaService;
 import com.reba.rebatest.model.PersonasStats;
+import com.reba.rebatest.services.PersonaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,7 +28,8 @@ public class PersonaController {
 
     @GetMapping
     @Operation(summary = "Obtener todas las personas", responses = {
-            @ApiResponse(description = "Lista de personas", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Persona.class)))
+            @ApiResponse(description = "Lista de personas", content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Persona.class)))
     })
     public List<Persona> getAllPersonas() {
         return personaService.findAll();
@@ -36,7 +37,8 @@ public class PersonaController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Obtener una persona por su ID", responses = {
-            @ApiResponse(description = "Persona encontrada", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Persona.class))),
+            @ApiResponse(description = "Persona encontrada", content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Persona.class))),
             @ApiResponse(description = "Persona no encontrada", responseCode = "404")
     })
     public ResponseEntity<Persona> getPersonaById(@PathVariable("id") final Long id) {
@@ -45,9 +47,16 @@ public class PersonaController {
     }
 
     @PostMapping
-    @Operation(summary = "Crear una nueva persona", responses = {
-            @ApiResponse(description = "Persona creada", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Persona.class)))
-    })
+    @Operation(summary = "Crear una nueva persona. Leer descripcion.",
+            description = "tener en cuenta que en esta version de la api no es posible crear  la persona con " +
+                    "relaciones o padres. Deben ir con una lista vacia y null. En el caso de datos de contacto" +
+                    " no debe tener asignado un id, ya que el mismo se popula por base de datos al momento de la " +
+                    "creacion",
+            responses = {
+                    @ApiResponse(description = "Persona creada", content = @Content(mediaType = "application/json",
+                            schema =
+                    @Schema(implementation = Persona.class)))
+            })
     public ResponseEntity<?> createPersona(@RequestBody final Persona persona) {
         final Persona nuevaPersona = personaService.save(persona);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevaPersona);
@@ -55,7 +64,8 @@ public class PersonaController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar una persona existente por su ID", responses = {
-            @ApiResponse(description = "Persona actualizada", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Persona.class))),
+            @ApiResponse(description = "Persona actualizada", content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Persona.class))),
             @ApiResponse(description = "Persona no encontrada", responseCode = "404")
     })
     public ResponseEntity<?> updatePersona(@PathVariable("id") final Long id, @RequestBody final Persona persona) {
@@ -90,22 +100,24 @@ public class PersonaController {
     })
     public ResponseEntity<String> establecerPadre(@PathVariable("idPadre") final Long idPadre,
                                                   @PathVariable("idHijo") final Long idHijo) {
-        final Optional<Persona> padre = personaService.findById(idPadre);
+        final Optional<Persona> mapadre = personaService.findById(idPadre);
         final Optional<Persona> hijo = personaService.findById(idHijo);
 
-        if (padre.isEmpty() || hijo.isEmpty()) {
+        if (mapadre.isEmpty() || hijo.isEmpty()) {
             return ResponseEntity.badRequest().body("Los IDs proporcionados no corresponden a personas existentes");
         }
 
-        hijo.get().setPadre(padre.get());
+        hijo.get().setMapadre(mapadre.get());
         personaService.save(hijo.get());
 
-        return ResponseEntity.ok("Se ha establecido a " + idPadre + " como padre de " + idHijo);
+        return ResponseEntity.ok("Se ha establecido a " + mapadre.get().getNombre()
+                + " como ma/padre de " + hijo.get().getNombre());
     }
 
     @GetMapping("/stats")
     @Operation(summary = "Obtener estadísticas de personas por país", responses = {
-            @ApiResponse(description = "Estadísticas de personas por país", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PersonasStats.class)))
+            @ApiResponse(description = "Estadísticas de personas por país", content = @Content(mediaType =
+                    "application/json", schema = @Schema(implementation = PersonasStats.class)))
     })
     public ResponseEntity<List<PersonasStats>> getStats() {
         final List<PersonasStats> stats = personaService.getPercentageByCountry();

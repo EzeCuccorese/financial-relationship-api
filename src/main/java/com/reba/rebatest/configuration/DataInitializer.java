@@ -84,6 +84,7 @@ public class DataInitializer implements CommandLineRunner {
         final Relacion relacion2 = new Relacion(null, persona3, persona4, Relacion.TipoRelacion.PRIMX);
         final Relacion relacion3 = new Relacion(null, persona5, persona6, Relacion.TipoRelacion.TIX);
 
+        persona1.setMapadre(persona4);
         // Persistir los datos en la base de datos
         paisRepository.saveAll(Arrays.asList(pais1, pais2, pais3, pais4));
         personaRepository.saveAll(Arrays.asList(persona1, persona2, persona3, persona4, persona5, persona6));

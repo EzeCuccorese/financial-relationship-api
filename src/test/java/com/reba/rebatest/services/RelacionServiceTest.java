@@ -9,12 +9,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class RelacionServiceTest {
 
@@ -26,7 +27,7 @@ public class RelacionServiceTest {
 
     @BeforeEach
     public void init() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
@@ -63,5 +64,24 @@ public class RelacionServiceTest {
         when(relacionRepository.save(any(Relacion.class))).thenReturn(relacion);
         final Relacion result = relacionService.crearRelacion(persona1, persona2, Relacion.TipoRelacion.TIX);
         assertEquals(relacion, result);
+    }
+
+    @Test
+    public void testEliminarRelaciones() {
+        final Persona persona = new Persona(); // Debe rellenarse según la implementación de Persona
+        relacionService.eliminarRelaciones(persona);
+        verify(relacionRepository, times(1)).deleteAllByPersona1OrPersona2(persona, persona);
+    }
+
+    @Test
+    public void testObtenerRelaciones() {
+        final Persona persona = new Persona(); // Debe rellenarse según la implementación de Persona
+        final List<Relacion> relacionesEsperadas = new ArrayList<>(); // Se puede rellenar con relaciones de prueba
+        when(relacionRepository.findByPersona1(persona)).thenReturn(relacionesEsperadas);
+
+        final List<Relacion> relacionesObtenidas = relacionService.obtenerRelaciones(persona);
+
+        assertEquals(relacionesEsperadas, relacionesObtenidas);
+        verify(relacionRepository, times(1)).findByPersona1(persona);
     }
 }

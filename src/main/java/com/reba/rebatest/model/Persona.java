@@ -1,5 +1,6 @@
 package com.reba.rebatest.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -47,20 +48,20 @@ public class Persona {
     @Schema(description = "El país de la persona")
     private Pais pais;
 
-    @MapsId
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "datos_contacto_id")
     @Schema(description = "Los datos de contacto de la persona")
     private DatosContacto datosContacto;
 
     @OneToMany(mappedBy = "persona1")
     @Schema(description = "Las relaciones de la persona")
+    @JsonManagedReference("relacion-persona1")
     private List<Relacion> relaciones;
 
     @ManyToOne
-    @JoinColumn(name = "padre_id")
-    @Schema(description = "El padre de la persona")
-    private Persona padre;
+    @JoinColumn(name = "mapadre_id")
+    @Schema(description = "El ma/padre de la persona")
+    private Persona mapadre;
 
     public Persona(final String nombre, final LocalDate fechaNacimiento, final String nacionalidad,
                    final String numeroDocumento, final TipoDocumento tipoDocumento, final Pais pais,

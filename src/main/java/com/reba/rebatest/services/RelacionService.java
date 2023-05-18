@@ -5,6 +5,8 @@ import com.reba.rebatest.model.Relacion;
 import com.reba.rebatest.repository.RelacionRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Servicio que gestiona las operaciones de la entidad Relacion.
  */
@@ -49,5 +51,24 @@ public class RelacionService {
         relacion.setPersona2(persona2);
         relacion.setTipoRelacion(tipoRelacion);
         return relacionRepository.save(relacion);
+    }
+
+    /**
+     * Elimina todas las relaciones en las que una persona específica está involucrada.
+     *
+     * @param persona la persona cuyas relaciones se quieren eliminar
+     */
+    public void eliminarRelaciones(final Persona persona) {
+        relacionRepository.deleteAllByPersona1OrPersona2(persona, persona);
+    }
+
+    /**
+     * Obtiene todas las relaciones en las que una persona específica es la primera persona.
+     *
+     * @param persona la persona cuyas relaciones se quieren obtener
+     * @return una lista de entidades Relacion donde la persona especificada es la primera persona en la relación
+     */
+    public List<Relacion> obtenerRelaciones(final Persona persona) {
+        return relacionRepository.findByPersona1(persona);
     }
 }

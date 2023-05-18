@@ -26,6 +26,9 @@ class PersonaServiceTest {
     @Mock
     private PersonaRepository personaRepository;
 
+    @Mock
+    private RelacionService relacionService;
+
     @InjectMocks
     private PersonaService personaService;
 
@@ -115,6 +118,18 @@ class PersonaServiceTest {
         verify(personaRepository, never()).save(persona);
     }
 
+    @Test
+    void testSave_InvalidDatosContacto_ShouldNoThrowDatoContactoInexistenteException() {
+        // Given
+        final Persona persona = new Persona();
+        persona.setNombre("John Doe");
+        persona.setDatosContacto(new DatosContacto("Marconi 12", null, null));
+        persona.setFechaNacimiento(LocalDate.of(1990, 1, 1));
+
+        // When & Then
+        final Persona save = personaService.save(persona);
+        verify(personaRepository, times(1)).save(persona);
+    }
     @Test
     void testDelete_ValidPersona_ShouldDeletePersona() {
         // Given
@@ -223,4 +238,31 @@ class PersonaServiceTest {
         }
         verify(personaRepository, times(1)).findAll();
     }
+
+    @Test
+    void testSave_InvalidDatosContactoEmailOnly_ShouldNoThrowDatoContactoInexistenteException() {
+        // Given
+        final Persona persona = new Persona();
+        persona.setNombre("John Doe");
+        persona.setDatosContacto(new DatosContacto(null, "john.doe@example.com", null));
+        persona.setFechaNacimiento(LocalDate.of(1990, 1, 1));
+
+        // When & Then
+        final Persona save = personaService.save(persona);
+        verify(personaRepository, times(1)).save(persona);
+    }
+
+    @Test
+    void testSave_InvalidDatosContactoTelefonoOnly_ShouldNoThrowDatoContactoInexistenteException() {
+        // Given
+        final Persona persona = new Persona();
+        persona.setNombre("John Doe");
+        persona.setDatosContacto(new DatosContacto(null, null, "123456789"));
+        persona.setFechaNacimiento(LocalDate.of(1990, 1, 1));
+
+        // When & Then
+        final Persona save = personaService.save(persona);
+        verify(personaRepository, times(1)).save(persona);
+    }
+
 }

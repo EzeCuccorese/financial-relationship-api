@@ -112,7 +112,7 @@ public class PersonaControllerTest {
 
         mockMvc.perform(post("/api/personas/1/padre/2"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Se ha establecido a 1 como padre de 2"));
+                .andExpect(content().string("Se ha establecido a Juan como ma/padre de Pedro"));
     }
 
     @Test

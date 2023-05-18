@@ -8,6 +8,7 @@ import com.reba.rebatest.model.PersonasStats;
 import com.reba.rebatest.repository.PersonaRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,14 +24,17 @@ import java.util.stream.Collectors;
 public class PersonaService {
 
     private final PersonaRepository personaRepository;
+    private final RelacionService relacionService;
 
     /**
      * Constructor que inyecta el repositorio de Personas {@link PersonaRepository}.
      *
      * @param personaRepository el repositorio de Personas.
+     * @param relacionService administra las relaciones de las personas.
      */
-    public PersonaService(final PersonaRepository personaRepository) {
+    public PersonaService(final PersonaRepository personaRepository, final RelacionService relacionService) {
         this.personaRepository = personaRepository;
+        this.relacionService = relacionService;
     }
 
     /**
@@ -70,7 +74,9 @@ public class PersonaService {
      *
      * @param persona la {@link Persona} a eliminar.
      */
+    @Transactional
     public void delete(final Persona persona) {
+        relacionService.eliminarRelaciones(persona);
         personaRepository.delete(persona);
     }
 

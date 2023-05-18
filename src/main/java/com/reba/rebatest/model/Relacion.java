@@ -1,5 +1,6 @@
 package com.reba.rebatest.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,10 +19,12 @@ public class Relacion {
 
     @ManyToOne
     @JoinColumn(name = "idPersona1")
+    @JsonBackReference("relacion-persona1")
     private Persona persona1;
 
     @ManyToOne
     @JoinColumn(name = "idPersona2")
+    @JsonBackReference("relacion-persona2")
     private Persona persona2;
 
     @Enumerated(EnumType.STRING)
