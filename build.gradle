@@ -19,6 +19,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     runtimeOnly 'com.mysql:mysql-connector-j'
     implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
 
 
     compileOnly 'org.projectlombok:lombok:1.18.26'
@@ -34,4 +35,8 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+bootJar {
+    archiveFileName = 'api-reba.jar'
 }

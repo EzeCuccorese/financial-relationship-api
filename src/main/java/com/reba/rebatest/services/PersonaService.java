@@ -1,8 +1,12 @@
 package com.reba.rebatest.services;
 
+import com.reba.rebatest.exceptions.DatoContactoInexistenteException;
 import com.reba.rebatest.exceptions.EdadIncorectaException;
+import com.reba.rebatest.model.DatosContacto;
 import com.reba.rebatest.model.Persona;
+import com.reba.rebatest.model.PersonasStats;
 import com.reba.rebatest.repository.PersonaRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -47,8 +51,10 @@ public class PersonaService {
      */
     public Persona save(final Persona persona) {
         validarEdad(persona);
+        validarDatoContacto(persona.getDatosContacto());
         return personaRepository.save(persona);
     }
+
 
     /**
      * Obtiene todas las {@link Persona}.
@@ -77,6 +83,7 @@ public class PersonaService {
      */
     public Persona update(final Long idPersona, final Persona persona) {
         validarEdad(persona);
+        validarDatoContacto(persona.getDatosContacto());
         final Optional<Persona> optionalPersona = personaRepository.findById(idPersona);
         if (optionalPersona.isPresent()) {
             final Persona personaExistente = optionalPersona.get();
@@ -104,6 +111,22 @@ public class PersonaService {
             throw new EdadIncorectaException();
         }
     }
+
+    /**
+     * Valida los datos de contacto.
+     *
+     * @param datosContacto los datos de contacto a validar
+     * @throws DatoContactoInexistenteException si todos los atributos requeridos son null o estan en blanco
+     */
+    private static void validarDatoContacto(final DatosContacto datosContacto) {
+        if (datosContacto == null ||
+                StringUtils.isBlank(datosContacto.getDireccion())
+                        && StringUtils.isBlank(datosContacto.getEmail())
+                        && StringUtils.isBlank(datosContacto.getTelefono())) {
+            throw new DatoContactoInexistenteException();
+        }
+    }
+
 
     /**
      * Obtiene todas las personas, las agrupa por nacionalidad y calcula el porcentaje de personas de cada

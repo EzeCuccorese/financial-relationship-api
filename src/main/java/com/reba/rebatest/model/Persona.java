@@ -13,6 +13,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"numeroDocumento", "tipoDocumento", "pais_id"}))
 public class Persona {
 
     @Id
@@ -46,6 +47,7 @@ public class Persona {
     @Schema(description = "El país de la persona")
     private Pais pais;
 
+    @MapsId
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "datos_contacto_id")
     @Schema(description = "Los datos de contacto de la persona")

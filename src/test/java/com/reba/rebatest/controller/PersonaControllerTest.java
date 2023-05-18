@@ -3,7 +3,7 @@ package com.reba.rebatest.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reba.rebatest.model.Persona;
 import com.reba.rebatest.services.PersonaService;
-import com.reba.rebatest.services.PersonasStats;
+import com.reba.rebatest.model.PersonasStats;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

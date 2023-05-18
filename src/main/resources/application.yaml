@@ -1,11 +1,21 @@
 # Database configuration
 spring:
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/reba
-    username: root
-    password: admin
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/reba}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:admin}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        hbm2ddl:
+          auto: create
+        show_sql: true
+      javax:
+        persistence:
+          schema-generation:
+            scripts:
+              create-target: "classpath:static/db/scripts/create.sql"

@@ -1,4 +1,4 @@
-package com.reba.rebatest.services;
+package com.reba.rebatest.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
