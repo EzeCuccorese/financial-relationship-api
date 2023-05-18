@@ -23,7 +23,7 @@ Antes de comenzar, asegúrese de tener instalados los siguientes componentes en 
 1. Ejecute el siguiente comando para compilar la aplicación:
 
    ```bash
-   gradle clean build
+   ./gradlew clean build
    ```
 
 2. El archivo JAR resultante se generará en el directorio `build/libs`.
