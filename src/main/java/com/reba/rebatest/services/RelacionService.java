@@ -5,20 +5,43 @@ import com.reba.rebatest.model.Relacion;
 import com.reba.rebatest.repository.RelacionRepository;
 import org.springframework.stereotype.Service;
 
+/**
+ * Servicio que gestiona las operaciones de la entidad Relacion.
+ */
 @Service
 public class RelacionService {
 
     private final RelacionRepository relacionRepository;
 
+    /**
+     * Constructor de la clase RelacionService.
+     *
+     * @param relacionRepository repositorio de relaciones
+     */
     public RelacionService(final RelacionRepository relacionRepository) {
         this.relacionRepository = relacionRepository;
     }
 
+    /**
+     * Obtiene una relación entre dos personas.
+     *
+     * @param persona1 la primera persona en la relación
+     * @param persona2 la segunda persona en la relación
+     * @return una entidad Relacion si existe una relación entre las dos personas, o null si no existe
+     */
     public Relacion obtenerRelacion(final Persona persona1, final Persona persona2) {
         return relacionRepository.findByPersona1AndPersona2OrPersona2AndPersona1(persona1, persona2, persona2,
-                persona1).orElseGet(null);
+                persona1).orElse(null);
     }
 
+    /**
+     * Crea una nueva relación entre dos personas.
+     *
+     * @param persona1     la primera persona en la nueva relación
+     * @param persona2     la segunda persona en la nueva relación
+     * @param tipoRelacion el tipo de la relación (por ejemplo, AMIGOS)
+     * @return la nueva entidad Relacion
+     */
     public Relacion crearRelacion(final Persona persona1, final Persona persona2,
                                   final Relacion.TipoRelacion tipoRelacion) {
         final Relacion relacion = new Relacion();

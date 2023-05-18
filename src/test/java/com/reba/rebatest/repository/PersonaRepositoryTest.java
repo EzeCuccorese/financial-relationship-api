@@ -70,7 +70,7 @@ public class PersonaRepositoryTest {
         final Persona personaGuardada = entityManager.find(Persona.class, persona.getId());
         Assertions.assertEquals("Ezequiel", personaGuardada.getNombre());
         Assertions.assertEquals(LocalDate.of(1985, 8, 30), personaGuardada.getFechaNacimiento());
-        Assertions.assertEquals("Estadounidense", personaGuardada.getNacionalidad());
+        Assertions.assertEquals("Argentina", personaGuardada.getNacionalidad());
     }
 
     @Test
@@ -80,9 +80,9 @@ public class PersonaRepositoryTest {
 
         //Then
         Assertions.assertNotNull(persona);
-        Assertions.assertEquals("John Doe", persona.getNombre());
-        Assertions.assertEquals(LocalDate.of(1990, 5, 10), persona.getFechaNacimiento());
-        Assertions.assertEquals("Argentino", persona.getNacionalidad());
+        Assertions.assertEquals("Vanesa", persona.getNombre());
+        Assertions.assertEquals(LocalDate.of(1987, 8, 25), persona.getFechaNacimiento());
+        Assertions.assertEquals("Argentina", persona.getNacionalidad());
     }
 
     @Test
