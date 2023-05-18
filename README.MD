@@ -184,3 +184,6 @@ Aquí se presentan ejemplos de los endpoints para dos controladores específicos
 
 ¡Ahora debería poder levantar la API y acceder a Swagger en la siguiente URL: [http://localhost:8080/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)!
 
+## Notas extras 
+
+Para la prueba de performance use Jmeter, con una prueba sencilla de stast y get persona, dejo los archivos para configurarlo más rapido en el raiz del repo.
