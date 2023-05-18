@@ -18,4 +18,4 @@ spring:
         persistence:
           schema-generation:
             scripts:
-              create-target: "classpath:static/db/scripts/create.sql"
+              create-target: "classpath:static/create.sql"
