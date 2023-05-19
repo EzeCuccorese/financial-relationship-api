@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class PersonasStats {
+public class PeopleStats {
     private String country;
     private double percentage;
 }

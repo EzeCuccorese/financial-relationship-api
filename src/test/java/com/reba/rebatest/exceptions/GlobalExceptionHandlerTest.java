@@ -1,8 +1,8 @@
 package com.reba.rebatest.exceptions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.reba.rebatest.model.Persona;
-import com.reba.rebatest.services.PersonaService;
+import com.reba.rebatest.model.Person;
+import com.reba.rebatest.services.PersonService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,17 +25,17 @@ public class GlobalExceptionHandlerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private PersonaService personaService;
+    private PersonService personService;
 
     @Test
     void whenRuntimeExceptionOccurs_thenGlobalExceptionHandlerIsInvoked() throws Exception {
 
-        final Persona persona = new Persona();
-        given(personaService.save(persona)).willThrow(new RuntimeException("Problemitas"));
+        final Person person = new Person();
+        given(personService.save(person)).willThrow(new RuntimeException("Problemitas"));
 
-        mockMvc.perform(post("/api/personas")
+        mockMvc.perform(post("/api/people")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(persona)))
+                        .content(new ObjectMapper().writeValueAsString(person)))
                 .andExpect(status().is(HttpStatus.BAD_REQUEST.value()))
                 .andExpect(MockMvcResultMatchers.content().string("Ocurrió un error. Problemitas"));
     }

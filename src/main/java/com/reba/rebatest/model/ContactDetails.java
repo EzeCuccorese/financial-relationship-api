@@ -1,5 +1,6 @@
 package com.reba.rebatest.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,19 +12,20 @@ import javax.persistence.Id;
 @Entity
 @Data
 @NoArgsConstructor
-public class DatosContacto {
+public class ContactDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
-    private String direccion;
-    private String telefono;
+    private String address;
+    private String phone;
     private String email;
 
-    public DatosContacto(final String direccion, final String telefono, final String email) {
-        this.direccion = direccion;
-        this.telefono = telefono;
+    public ContactDetails(final String address, final String phone, final String email) {
+        this.address = address;
+        this.phone = phone;
         this.email = email;
     }
 }

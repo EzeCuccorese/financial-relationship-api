@@ -1,6 +1,5 @@
 package com.reba.rebatest.model;
 
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,16 +11,16 @@ import javax.persistence.Id;
 @Entity
 @Data
 @NoArgsConstructor
-public class Pais {
+public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nombre;
-    private String codigo;
+    private String name;
+    private String code;
 
-    public Pais(final String nombre, final String codigo) {
-        this.nombre = nombre;
-        this.codigo = codigo;
+    public Country(final String name, final String code) {
+        this.name = name;
+        this.code = code;
     }
 }
