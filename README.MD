@@ -41,7 +41,112 @@ Antes de comenzar, asegúrese de tener instalados los siguientes componentes en 
 ## Paso 4: Acceso a Swagger
 
 Abra su navegador web y vaya a la siguiente URL: [http://localhost:8080/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)
-Algunos Json de ejemplo: 
+
+- Algunos Json de ejemplo para consumir las diferentes APIs descritas en la documentación:
+
+### Get a person by their ID
+```json
+GET /api/people/{id}
+
+Example:
+GET /api/people/1
+```
+
+### Update an existing person by their ID
+```json
+PUT /api/people/{id}
+
+Example:
+PUT /api/people/1
+
+Request Body:
+{
+  "name": "John Doe",
+  "birthDate": "1990-05-18",
+  "nationality": "USA",
+  "documentNumber": "123456789",
+  "documentType": "PASSPORT",
+  "country": {
+    "id": 1,
+    "name": "United States",
+    "code": "US"
+  },
+  "contactDetails": {
+    "address": "123 Main St",
+    "phone": "+1 555-1234",
+    "email": "john.doe@example.com"
+  },
+  "pather": null
+}
+```
+
+### Delete a person by their ID
+```json
+DELETE /api/people/{id}
+
+Example:
+DELETE /api/people/1
+```
+
+### Get all people
+```json
+GET /api/people
+
+Example:
+GET /api/people
+```
+
+### Create a new person
+```json
+POST /api/people
+
+Example:
+POST /api/people
+
+Request Body:
+{
+  "name": "Jane Smith",
+  "birthDate": "1995-10-20",
+  "nationality": "Canada",
+  "documentNumber": "987654321",
+  "documentType": "PASSPORT",
+  "country": {
+    "id": 2,
+    "name": "Canada",
+    "code": "CA"
+  },
+  "contactDetails": {
+    "address": "456 Maple Ave",
+    "phone": "+1 555-5678",
+    "email": "jane.smith@example.com"
+  },
+  "pather": null
+}
+```
+
+### Establish father relationship between two people
+```json
+POST /api/people/{idFather}/father/{idChild}
+
+Example:
+POST /api/people/1/father/2
+```
+
+### Get relationship between two people by their IDs
+```json
+GET /relationships/{id1}/{id2}
+
+Example:
+GET /relationships/1/2
+```
+
+### Get people statistics by country
+```json
+GET /api/people/stats
+
+Example:
+GET /api/people/stats
+```
 
 ## Posibles errores
 
