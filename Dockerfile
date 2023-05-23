@@ -16,6 +16,11 @@ RUN gradle build --no-daemon
 # Segunda etapa de la construcción para ejecutar la aplicación
 FROM openjdk:17-jdk
 
+# Configurar las variables de entorno
+ENV SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/reba \
+    SPRING_DATASOURCE_USERNAME=rebauser \
+    SPRING_DATASOURCE_PASSWORD=rebapassword
+
 # Exponer el puerto 8080
 EXPOSE 8080
 
