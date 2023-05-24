@@ -1,9 +1,11 @@
+
+
 # Database configuration
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/reba}
-    username: ${SPRING_DATASOURCE_USERNAME:rebauser}
-    password: ${SPRING_DATASOURCE_PASSWORD:rebapassword}
+    url: jdbc:mysql://${RDS_HOSTNAME:localhost}:${RDS_PORT:3306}/${RDS_DB_NAME:reba}
+    username: ${RDS_USERNAME:rebauser}
+    password: ${RDS_PASSWORD:rebapassword}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -14,4 +16,5 @@ spring:
         hbm2ddl:
           auto: create
         show_sql: true
-
+server:
+  port: 5000
