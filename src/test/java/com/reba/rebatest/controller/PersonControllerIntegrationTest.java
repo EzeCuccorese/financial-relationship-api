@@ -1,7 +1,6 @@
 package com.reba.rebatest.controller;
 
 import com.reba.rebatest.model.*;
-import org.junit.Ignore;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

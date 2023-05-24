@@ -25,7 +25,7 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     @Override
-    public void run(final String... args) throws Exception {
+    public void run(final String... args) {
         loadExampleCountries();
     }
 
