@@ -156,6 +156,8 @@ GET /api/people/stats
 
 ¡Ahora debería poder levantar la API y acceder a Swagger en la siguiente URL: [http://localhost:8080/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)!
 
+La app esta publicada aqui: http://reba-cuccoez.sa-east-1.elasticbeanstalk.com/swagger-ui/index.html#/People/getAllPeople
+
 ## Notas extras 
 
 Para la prueba de performance use Jmeter, con una prueba sencilla de stast y get person, dejo los archivos para configurarlo más rapido en el raiz del repo.
