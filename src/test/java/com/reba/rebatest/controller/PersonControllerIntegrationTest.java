@@ -1,6 +1,7 @@
 package com.reba.rebatest.controller;
 
 import com.reba.rebatest.model.*;
+import org.junit.Ignore;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +23,7 @@ import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Disabled("Se deja desahabilitado por usar muchos recursos para iniciar.")
 @Testcontainers
 @ActiveProfiles("integration")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

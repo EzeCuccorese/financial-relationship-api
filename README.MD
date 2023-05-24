@@ -154,7 +154,7 @@ GET /api/people/stats
 - Si experimenta errores al compilar o ejecutar la aplicación, asegúrese de tener instalado Java, Docker y Gradle correctamente y de que todas las dependencias del proyecto estén configuradas adecuadamente.
 - Si encuentra problemas con los endpoints o el funcionamiento de la aplicación, verifique que los controladores, servicios y modelos estén implementados correctamente y que las rutas y los parámetros de los endpoints coincidan con los proporcionados en este README.
 
-¡Ahora debería poder levantar la API y acceder a Swagger en la siguiente URL: [http://localhost:8080/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)!
+¡Ahora debería poder levantar la API y acceder a Swagger en la siguiente URL: [http://localhost:5000/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)!
 
 La app esta publicada aqui: http://reba-cuccoez.sa-east-1.elasticbeanstalk.com/swagger-ui/index.html#/People/getAllPeople
 

@@ -22,7 +22,7 @@ ENV SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/reba \
     SPRING_DATASOURCE_PASSWORD=rebapassword
 
 # Exponer el puerto 8080
-EXPOSE 8080
+EXPOSE 5000
 
 # Configurar el directorio de trabajo
 WORKDIR /app
