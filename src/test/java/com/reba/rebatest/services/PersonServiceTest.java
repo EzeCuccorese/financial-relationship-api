@@ -254,4 +254,24 @@ class PersonServiceTest {
         verify(personRepository, times(1)).save(person);
     }
 
+    @Test
+    void testFindAll_ShouldReturnList() {
+        final Person person = new Person();
+        when(personRepository.findAll()).thenReturn(List.of(person));
+
+        final List<Person> result = personService.findAll();
+
+        assertEquals(1, result.size());
+        verify(personRepository, times(1)).findAll();
+    }
+
+    @Test
+    void testSave_BlankContactDetails_ShouldThrowContactDataNonexistentException() {
+        final Person person = new Person();
+        person.setName("John Doe");
+        person.setContactDetails(new ContactDetails("   ", "", null));
+        person.setBirthDate(LocalDate.of(1990, 1, 1));
+
+        assertThrows(ContactDataNonexistentException.class, () -> personService.save(person));
+    }
 }

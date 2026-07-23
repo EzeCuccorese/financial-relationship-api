@@ -6,7 +6,7 @@ Aca se detallan las instrucciones detalladas sobre cómo levantar una aplicació
 
 Antes de comenzar, asegúrese de tener instalados los siguientes componentes en su sistema:
 
-- Java Development Kit (JDK) 17+
+- Java Development Kit (JDK) 21+
 - Docker y docker-compose
 - Gradle
 
@@ -15,7 +15,7 @@ Antes de comenzar, asegúrese de tener instalados los siguientes componentes en 
 1. Clone el repositorio de la aplicación en su máquina local utilizando el siguiente comando:
 
    ```bash
-   git clone https://gitlab.com/cuccoez/rebatest.git
+   git clone https://github.com/cuccoez/rebatest.git
    ```
 
 ## Paso 2: Compilación y empaquetado de la aplicación
