@@ -3,8 +3,8 @@ package com.reba.rebatest.repository;
 import com.reba.rebatest.model.PeopleStats;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
