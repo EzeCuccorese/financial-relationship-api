@@ -6,7 +6,7 @@ import com.reba.rebatest.services.PersonService;
 import com.reba.rebatest.services.RelationshipService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
@@ -17,10 +17,10 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class RelationshipControllerTest {
 
-    @MockBean
+    @MockitoBean
     private RelationshipService relationshipService;
 
-    @MockBean
+    @MockitoBean
     private PersonService personService;
 
     @Test

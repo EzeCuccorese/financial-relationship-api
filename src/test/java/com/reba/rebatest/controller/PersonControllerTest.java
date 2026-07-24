@@ -5,7 +5,7 @@ import com.reba.rebatest.services.PersonService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -20,7 +20,7 @@ import static org.mockito.ArgumentMatchers.eq;
 @SpringBootTest
 public class PersonControllerTest {
 
-    @MockBean
+    @MockitoBean
     private PersonService personService;
 
     @Test
