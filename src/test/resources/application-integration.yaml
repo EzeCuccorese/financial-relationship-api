@@ -1,9 +1,9 @@
 # Database configuration
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/reba}
-    username: ${SPRING_DATASOURCE_USERNAME:rebauser}
-    password: ${SPRING_DATASOURCE_PASSWORD:rebapassword}
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/financial_relationship_db}
+    username: ${SPRING_DATASOURCE_USERNAME:financial_relationship_dbuser}
+    password: ${SPRING_DATASOURCE_PASSWORD:financial_relationship_dbpassword}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

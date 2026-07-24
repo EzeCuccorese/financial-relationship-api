@@ -3,9 +3,9 @@
 # Database configuration
 spring:
   datasource:
-    url: jdbc:mysql://${RDS_HOSTNAME:localhost}:${RDS_PORT:3306}/${RDS_DB_NAME:reba}
-    username: ${RDS_USERNAME:rebauser}
-    password: ${RDS_PASSWORD:rebapassword}
+    url: jdbc:mysql://${RDS_HOSTNAME:localhost}:${RDS_PORT:3306}/${RDS_DB_NAME:financial_relationship_db}
+    username: ${RDS_USERNAME:financial_relationship_dbuser}
+    password: ${RDS_PASSWORD:financial_relationship_dbpassword}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
